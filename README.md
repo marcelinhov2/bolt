@@ -1,33 +1,39 @@
 #New Angular Kickoff
-AngularJS application using Angular-Kickoff ( https://github.com/marcelinhov2/angular-kickoff )
+Sugestão de "kickoff" para camada frontend de novos microservices.
 
-##Installation
+##Missão
+- Aumentar a produtividade dos desenvolvedores frontend
+- Simplificar a inserção de novos pacotes
+- Gerar uma distribution simples, que pode ser usada em qualquer ambiente
+- Diminuir a quantidade de requests necessários para a aplicação rodar
+- Migrar para um task runner mais performático
+- Simplificar ao máximo o início do desenvolvimento de interfaces 
+para novos projetos
+- IDE's free
 
-Clone repo using git
-```sh
-git clone git@github.com:marcelinhov2/test.git
-cd test
+##Instalação
+- Clonar repositório
+
 ```
-
-Install dependencies
-```sh
-make setup
-```
-
-###Running the App during Development
-This command automatically compiles coffee and LESS, injects bower components, starts livereload server and opens your app in the browser.
-```sh
-make server
+git clone git@github.com:DomPhysis/new-angular-kickoff.git
 ```
 
-###Compiling app for development
-This command compiles project. Output goes to ```www/``` folder
-```
-make compile
-```
+- Instalando dependências 
 
-###Building the App for Production
-This command compiles project and optimizes it for production. Output goes to ```dist/``` folder
-```
-make build
-```
+```npm install``` ou ```make setup```
+
+Ao finalizar, ele roda também o comando ```bower install``` para dependências do browser
+
+- Erguer server de desenvolvimento
+
+```make server``` ou ```gulp up```
+
+##Build desenvolvimento ( não minificada ) 
+- Gerar www
+
+```gulp build``` ou ```make build```
+
+##Build Liberação ( minificada ) 
+- Gerar distribution
+
+```gulp build --compress``` ou ```make dist```
