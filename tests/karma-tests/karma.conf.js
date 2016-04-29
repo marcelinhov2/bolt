@@ -11,8 +11,8 @@ module.exports = function(config){
       'tests/karma-tests/app/**/*.js'
     ],
 
-    autoWatch : false,
-    singleRun: true,
+    autoWatch : true,
+    singleRun: false,
 
     frameworks: [ 'jasmine' ],
 
