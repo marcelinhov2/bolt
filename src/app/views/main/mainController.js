@@ -3,9 +3,9 @@
 
 	function MainController(
 		$scope
-	){
-	
-		function init(){
+	) {
+
+		function init() {
 			$scope.test = 'teste';
 		}
 

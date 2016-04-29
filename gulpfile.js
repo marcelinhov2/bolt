@@ -23,12 +23,15 @@ var filter = require('gulp-filter');
 var cleanCSS = require('gulp-clean-css');
 var jshint = require('gulp-jshint');
 var uglifycss = require('gulp-uglifycss');
+var prettify = require('gulp-jsbeautifier');
 
 var env = argv.compress ? 'production' : 'testing';
 var folder = argv.compress ? 'dist' : 'www';
 
 var devPaths = {
 	base      : 'src/',
+	baseApp   : 'src/app',
+	allFiles  : 'src/app/**/*',
 	index     : 'src/index.html',
 	fonts     : 'src/assets/fonts/**/*',
 	images    : 'src/assets/images/**/*',
@@ -95,6 +98,24 @@ gulp.task('bower:styles', function() {
 		)
 		.pipe(
 			gulp.dest(distPaths.styles)
+		);
+});
+
+gulp.task('code:prettify', function() {
+	return gulp.src(devPaths.allFiles)
+		.pipe(prettify({
+			indent_level: 4,
+			js: {
+				"indent_size": 4,
+				"indent_char": "	",
+				"indent_level": 0,
+				"indent_with_tabs": true,
+				"preserve_newlines": true,
+				"max_preserve_newlines": 10
+			}
+		}))
+		.pipe(
+			gulp.dest(devPaths.baseApp)
 		);
 });
 
@@ -294,6 +315,7 @@ gulp.task('watch', function() {
 gulp.task('compile', function(cb) {
 	runSequence(
 		[
+			'code:prettify',
 			'scripts', 
 			'styles', 
 			'images', 
