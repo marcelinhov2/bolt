@@ -1,8 +1,8 @@
 (function() {
 	function App() {
 		return [
-			'templates', 
-			'ui.router', 
+			'templates',
+			'ui.router',
 			'ngResource'
 		];
 	}

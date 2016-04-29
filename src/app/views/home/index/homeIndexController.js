@@ -3,8 +3,8 @@
 
 	function HomeIndexController(
 		$scope
-	){
-		function init(){
+	) {
+		function init() {
 			$scope.test = 'home index';
 		}
 

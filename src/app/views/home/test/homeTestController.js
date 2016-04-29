@@ -1,10 +1,10 @@
 (function() {
 	'use strict';
-	
+
 	function HomeTestController(
 		$scope
-	){
-		function init(){
+	) {
+		function init() {
 			$scope.test = 'home Test';
 		}
 

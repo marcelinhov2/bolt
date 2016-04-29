@@ -1,10 +1,10 @@
 (function() {
 	'use strict';
-	
+
 	function HomeController(
 		$scope
-	){
-		function init(){
+	) {
+		function init() {
 			// @if NODE_ENV='testing'
 			$scope.test = 'testing';
 			// @endif 
