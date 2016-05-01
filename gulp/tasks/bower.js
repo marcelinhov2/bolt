@@ -1,7 +1,7 @@
 var bowerFiles = require('main-bower-files');
 
 module.exports = function (gulp, options, plugins) {
-  gulp.task("bower:scripts", function() {
+  gulp.task('bower:scripts', function() {
     var jsBowerFiles = bowerFiles({
       filter: /\.js$/i,
       paths: {

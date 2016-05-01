@@ -14,22 +14,22 @@ module.exports = function (gulp, options, plugins) {
       .pipe(
         plugins.jshint(
           {
-            "maxparams": 10,
-            "indent": false,
-            "camelcase": true,
-            "eqeqeq": true,
-            "forin": true,
-            "immed": true,
-            "latedef": true,
-            "noarg": true,
-            "noempty": true,
-            "nonew": true,
-            "unused": true,
-            "laxbreak": true,
-            "laxcomma": true,
+            'maxparams': 10,
+            'indent': false,
+            'camelcase': true,
+            'eqeqeq': true,
+            'forin': true,
+            'immed': true,
+            'latedef': true,
+            'noarg': true,
+            'noempty': true,
+            'nonew': true,
+            'unused': true,
+            'laxbreak': true,
+            'laxcomma': true,
 
-            "globals": { 
-              "require": false
+            'globals': { 
+              'require': false
             }
           }
         )

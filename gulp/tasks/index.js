@@ -4,16 +4,16 @@ module.exports = function (gulp, options, plugins) {
   gulp.task('index', function() {
     var scripts, styles;
 
-    styles = options.folder + "/assets/styles/**/*.css";
+    styles = options.folder + '/assets/styles/**/*.css';
     
     if(options.argv.compress){
       scripts = [
-        options.folder + "/app/dependencies-*.js",
-        options.folder + "/app/templates-*.js",
-        options.folder + "/app/main-*.js"
+        options.folder + '/app/dependencies-*.js',
+        options.folder + '/app/templates-*.js',
+        options.folder + '/app/main-*.js'
       ]
     } else {
-      scripts = options.folder + "/app/**/*.js";
+      scripts = options.folder + '/app/**/*.js';
     }
 
     return gulp.src(options.devPaths.index)

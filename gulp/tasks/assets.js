@@ -33,8 +33,8 @@ module.exports = function (gulp, options, plugins) {
       )
       .pipe(
         plugins.if(options.argv.compress, plugins.uglifycss({
-          "maxLineLen": 80,
-          "uglyComments": true
+          'maxLineLen': 80,
+          'uglyComments': true
         }))
       )
       .pipe(
