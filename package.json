@@ -1,5 +1,5 @@
 {
-  "name": "new-angular-kickoff",
+  "name": "bolt",
   "scripts": {
     "postinstall": "bower install --allow-root",
     "test": "make build && make karma",

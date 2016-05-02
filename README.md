@@ -1,4 +1,4 @@
-#New Angular Kickoff
+#Bolt
 Sugestão de "kickoff" para camada frontend de novos microservices.
 
 ##Missão
@@ -15,7 +15,7 @@ para novos projetos
 - Clonar repositório
 
 ```
-git clone git@github.com:DomPhysis/new-angular-kickoff.git
+git clone git@github.com:DomPhysis/bolt.git
 ```
 
 - Instalando dependências 
