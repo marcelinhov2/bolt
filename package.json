@@ -37,6 +37,7 @@
     "karma": "latest",
     "karma-jasmine": "latest",
     "karma-phantomjs-launcher": "latest",
+    "load-gulp-tasks": "^0.1.0",
     "main-bower-files": "latest",
     "open": "latest",
     "phantomjs-prebuilt": "latest",
