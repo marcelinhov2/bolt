@@ -1,29 +1,17 @@
 var fs = require('fs');
 var path = require('path');
-var gulp = require('gulp');
 var argv = require('yargs').argv;
-var cache = require('gulp-cached');
-var gulpif = require('gulp-if');
 var open = require('open');
 var es = require('event-stream');
-var less = require('gulp-less');
-var concat = require('gulp-concat');
-var uglify = require('gulp-uglify');
-var inject = require('gulp-inject');
-var connect = require('gulp-connect');
-var imagemin = require('gulp-imagemin');
 var bowerFiles = require('main-bower-files');
 var rimraf = require('rimraf');
-var rename = require("gulp-rename");
-var templateCache = require('gulp-angular-templatecache');
 var runSequence = require('run-sequence');
-var preprocess = require('gulp-preprocess');
-var rev = require('gulp-rev');
-var filter = require('gulp-filter');
-var cleanCSS = require('gulp-clean-css');
-var jshint = require('gulp-jshint');
-var uglifycss = require('gulp-uglifycss');
-var prettify = require('gulp-jsbeautifier');
+
+var gulp = require('gulp');
+var gulpLoadPlugins = require('gulp-load-plugins');
+var plugins = gulpLoadPlugins({
+	scope: ['devDependencies']
+});
 
 var env = argv.compress ? 'production' : 'testing';
 var folder = argv.compress ? 'dist' : 'www';
@@ -65,13 +53,13 @@ gulp.task("bower:scripts", function() {
 
 	return gulp.src(jsBowerFiles)
 		.pipe(
-			concat('dependencies.js')
+			plugins.concat('dependencies.js')
 		)
 		.pipe(
-			gulpif(argv.compress, uglify())
+			plugins.if(argv.compress, plugins.uglify())
 		)
 		.pipe(
-			gulpif(argv.compress, rev())
+			plugins.if(argv.compress, plugins.rev())
 		)
 		.pipe(
 			gulp.dest(distPaths.app)
@@ -88,13 +76,13 @@ gulp.task('bower:styles', function() {
 
 	return gulp.src(cssBowerFiles)
 		.pipe(
-			concat('bower.css')
+			plugins.concat('bower.css')
 		)
 		.pipe(
-			cleanCSS({compatibility: 'ie8'})
+			plugins.cleanCss({compatibility: 'ie8'})
 		)
 		.pipe(
-			gulpif(argv.compress, rev())
+			plugins.if(argv.compress, plugins.rev())
 		)
 		.pipe(
 			gulp.dest(distPaths.styles)
@@ -103,7 +91,7 @@ gulp.task('bower:styles', function() {
 
 gulp.task('code:prettify', function() {
 	return gulp.src(devPaths.allFiles)
-		.pipe(prettify({
+		.pipe(plugins.jsbeautifier({
 			indent_level: 4,
 			js: {
 				"indent_size": 4,
@@ -122,17 +110,17 @@ gulp.task('code:prettify', function() {
 gulp.task('scripts', function() {
 	return gulp.src(devPaths.scripts)
 		.pipe(
-			cache('scripts')
+			plugins.cached('scripts')
 		)
 		.pipe(
-			preprocess({
+			plugins.preprocess({
 				context: {
 					NODE_ENV: env
 				}
 			})
 		)
 		.pipe(
-			jshint(
+			plugins.jshint(
 				{
 					"maxparams": 10,
 					"indent": false,
@@ -155,16 +143,16 @@ gulp.task('scripts', function() {
 			)
 		)
 		.pipe(
-			jshint.reporter('default')
+			plugins.jshint.reporter('default')
 		)
 		.pipe(
-			gulpif(argv.compress, uglify())
+			plugins.if(argv.compress, plugins.uglify())
 		)
 		.pipe(
-			gulpif(argv.compress, concat('main.js'))
+			plugins.if(argv.compress, plugins.concat('main.js'))
 		)
 		.pipe(
-			gulpif(argv.compress, rev())
+			plugins.if(argv.compress, plugins.rev())
 		)
 		.pipe(
 			gulp.dest(distPaths.app)
@@ -174,13 +162,13 @@ gulp.task('scripts', function() {
 gulp.task('styles', function() {
 	return gulp.src(devPaths.baseStyle)
 		.pipe(
-			less()
+			plugins.less()
 		)
 		.pipe(
-			gulpif(argv.compress, rev())
+			plugins.if(argv.compress, plugins.rev())
 		)
 		.pipe(
-			gulpif(argv.compress, uglifycss({
+			plugins.if(argv.compress, plugins.uglifycss({
 				"maxLineLen": 80,
 				"uglyComments": true
 			}))
@@ -193,23 +181,23 @@ gulp.task('styles', function() {
 gulp.task('styles:reload', function() {
 	return gulp.src(devPaths.baseStyle)
 		.pipe(
-			less()
+			plugins.less()
 		)
 		.pipe(
 			gulp.dest(distPaths.styles)
 		)
 		.pipe(
-			connect.reload()
+			plugins.connect.reload()
 		);
 });
 
 gulp.task('images', function() {
 	return gulp.src(devPaths.images)
 		.pipe(
-			cache('images')
+			plugins.cached('images')
 		)
 		.pipe(
-			gulpif(argv.compress, imagemin())
+			plugins.if(argv.compress, plugins.imagemin())
 		)
 		.pipe(
 			gulp.dest(distPaths.images)
@@ -219,7 +207,7 @@ gulp.task('images', function() {
 gulp.task('fonts', function() {
 	return gulp.src(devPaths.fonts)
 		.pipe(
-			cache('fonts')
+			plugins.cached('fonts')
 		)
 		.pipe(
 			gulp.dest(distPaths.fonts)
@@ -229,21 +217,21 @@ gulp.task('fonts', function() {
 gulp.task('partials', function() {
 	return gulp.src(devPaths.partials)
 		.pipe(
-			templateCache('templates', {
+			plugins.angularTemplatecache('templates', {
 				standalone: true,
 				root: '/app/'
 			})
 		)
 		.pipe(
-			rename({
+			plugins.rename({
 				extname: '.js'
 			})
 		)
 		.pipe(
-			gulpif(argv.compress, uglify())
+			plugins.if(argv.compress, plugins.uglify())
 		)
 		.pipe(
-			gulpif(argv.compress, rev())
+			plugins.if(argv.compress, plugins.rev())
 		)
 		.pipe(
 			gulp.dest(distPaths.app)
@@ -267,7 +255,7 @@ gulp.task('index', function() {
 
 	return gulp.src(devPaths.index)
 		.pipe(
-			inject(
+			plugins.inject(
 				es.merge(
 					gulp.src(styles, {
 						read: false
@@ -287,7 +275,7 @@ gulp.task('index', function() {
 });
 
 gulp.task('server', function() {
-	connect.server({
+	plugins.connect.server({
 		port: 1337,
 		root: folder,
 		base: 'http://localhost',
@@ -301,7 +289,7 @@ gulp.task('server', function() {
 
 gulp.task('reload', function() {
 	return gulp.src(devPaths.index)
-		.pipe(connect.reload());
+		.pipe(plugins.connect.reload());
 });
 
 gulp.task('watch', function() {
