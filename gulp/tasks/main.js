@@ -4,12 +4,12 @@ module.exports = function (gulp, options, plugins) {
   gulp.task('compile', function(cb) {
     runSequence(
       [
-        'formatter',
         'scripts', 
         'styles', 
         'images', 
         'fonts'
       ], 
+      'formatter',
       'templates', 
       'index', 
       'reload', 
