@@ -38,6 +38,9 @@ module.exports = function (gulp, options, plugins) {
         plugins.jshint.reporter('default')
       )
       .pipe(
+        plugins.if(options.argv.compress, plugins.ngAnnotate())
+      )
+      .pipe(
         plugins.if(options.argv.compress, plugins.uglify())
       )
       .pipe(
