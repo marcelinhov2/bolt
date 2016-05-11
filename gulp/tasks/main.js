@@ -9,10 +9,10 @@ module.exports = function (gulp, options, plugins) {
         'images', 
         'fonts'
       ], 
-      'formatter',
       'templates', 
       'index', 
       'reload', 
+      'formatter:js',
       cb
     );
   });

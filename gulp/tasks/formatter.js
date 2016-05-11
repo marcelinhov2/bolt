@@ -1,8 +1,8 @@
 module.exports = function (gulp, options, plugins) {
-  gulp.task('formatter', function() {
+  gulp.task('formatter:js', function() {
     return gulp.src(options.devPaths.allFiles)
       .pipe(
-        plugins.cached('formatted')
+        plugins.cached('scripts')
       )
       .pipe(plugins.jsbeautifier({
         indent_level: 4,
