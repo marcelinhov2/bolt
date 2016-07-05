@@ -2,6 +2,9 @@ module.exports = function (gulp, options, plugins) {
   gulp.task('templates', function() {
     return gulp.src(options.devPaths.templates)
       .pipe(
+        plugins.htmlmin({collapseWhitespace: true})
+      )
+      .pipe(
         plugins.angularTemplatecache('templates', {
           standalone: true,
           root: '/app/'
