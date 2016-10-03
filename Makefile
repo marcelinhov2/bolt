@@ -21,5 +21,9 @@ build:
 karma:
 	@$(KA) start tests/karma-tests/karma.conf.js
 
+publish:
+	@$(GU) build --compress
+	@$(GU) publish --compress
+
 # protractor:
 # 	@$(PR) tests/e2e-tests/protractor-conf.js

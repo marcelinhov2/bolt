@@ -15,6 +15,7 @@
     "event-stream": "^3.3.2",
     "gulp": "^3.9.1",
     "gulp-angular-templatecache": "^1.8.0",
+    "gulp-awspublish": "^3.3.0",
     "gulp-cached": "^1.1.0",
     "gulp-clean-css": "^2.0.6",
     "gulp-concat": "^2.6.0",

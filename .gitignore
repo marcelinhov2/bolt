@@ -4,3 +4,4 @@ dist/
 www/
 npm-debug.log
 .DS_Store    
+.awspublish-*
