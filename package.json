@@ -48,6 +48,7 @@
     "phantomjs-prebuilt": "latest",
     "rimraf": "^2.5.2",
     "run-sequence": "^1.2.1",
-    "yargs": "^4.7.1"
+    "yargs": "^4.7.1",
+    "gulp-htmlmin": "latest"
   }
 }
